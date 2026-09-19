@@ -25,6 +25,10 @@ React(Vite) + ASP.NET Core Web API 모노레포. 블로그, 날씨, 스마트홈
 - backend/frontend 이미지 태그는 git commit SHA 기준으로 생성한다.
 - Deploy 스테이지는 staging 통과 후에만 production으로 진행한다.
 
+## 로컬 개발
+- 백엔드: `dotnet run --project backend/WeatherApi --launch-profile http` (http://localhost:5224, Swagger UI: `/swagger`). `WEATHER_API_KEY` 환경변수 필요.
+- 프론트엔드: `cd frontend && npm run dev`. Vite가 `/api`를 5224로 프록시한다.
+
 ## 작업 방식
 - 각 단계는 최소 1개의 의미 있는 git 커밋으로 마무리한다.
 - 새 폴더/컨벤션이 생기면 이 파일을 갱신한다.

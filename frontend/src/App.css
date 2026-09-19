@@ -82,3 +82,12 @@
   margin-bottom: 16px;
   text-decoration: none;
 }
+
+.weather {
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+
+.weather--error {
+  opacity: 0.6;
+}

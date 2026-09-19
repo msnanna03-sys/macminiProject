@@ -28,12 +28,12 @@
 - [v] 단계 마무리 git 커밋
 
 ## 3단계 (하) — REST API 서버 (ASP.NET Core Web API) · 4~5일
-- [ ] `dotnet new webapi -o backend/WeatherApi`
-- [ ] WeatherCli 로직을 `GET /api/weather` 엔드포인트로 이전
-- [ ] Swagger 적용
-- [ ] React 날씨 컴포넌트 작성 후 블로그 헤더에 배치
-- [ ] frontend → backend API 호출 구조 동작 확인
-- [ ] 단계 마무리 git 커밋
+- [v] `dotnet new webapi -o backend/WeatherApi`
+- [v] WeatherCli 로직을 `GET /api/weather` 엔드포인트로 이전
+- [v] Swagger 적용
+- [v] React 날씨 컴포넌트 작성 후 블로그 헤더에 배치
+- [v] frontend → backend API 호출 구조 동작 확인 (Vite 프록시 경유 호출까지 확인, 실제 날씨 데이터는 키 활성화 후 확인 필요)
+- [v] 단계 마무리 git 커밋
 
 ## 4단계 (중) — 홈 자동화 대시보드 · 1주
 - [ ] Home Assistant 준비 (또는 mock 센서 엔드포인트로 대체)

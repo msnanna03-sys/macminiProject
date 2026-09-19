@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import Weather from './Weather'
 
 export default function Header() {
   return (
@@ -11,6 +12,7 @@ export default function Header() {
           포스트
         </NavLink>
       </nav>
+      <Weather />
     </header>
   )
 }
