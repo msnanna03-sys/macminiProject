@@ -1,0 +1,84 @@
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 32px;
+}
+
+.site-header__brand a {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-header__nav a {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.7;
+}
+
+.site-header__nav a.active {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.voice-memo {
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  background: #fafafa;
+}
+
+.voice-memo__hint {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.voice-memo__form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.voice-memo__filename {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list__item {
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.post-list__item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-list__date {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.post-detail__back {
+  display: inline-block;
+  margin-bottom: 16px;
+  text-decoration: none;
+}
