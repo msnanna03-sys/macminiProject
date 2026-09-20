@@ -33,7 +33,7 @@ React(Vite) + ASP.NET Core Web API 모노레포. 블로그, 날씨, 스마트홈
 
 - Docker: 루트에서 `docker compose up -d --build`. 프론트 http://localhost:8081 (nginx가 `/api`를 backend:8080으로 프록시), Home Assistant http://localhost:8123. `WEATHER_API_KEY`는 프로젝트 루트 `.env`(git 제외)에 `WEATHER_API_KEY=값` 형태로 두면 compose가 전달한다.
 
-- 데이터 수집: WeatherApi의 `CollectorWorker`가 환율(USD/KRW)·실내 온도를 `HISTORY_INTERVAL_MINUTES`(기본 10)마다 SQLite(`backend/WeatherApi/data/history.db`, git 제외)에 저장하고 `GET /api/history?metric=&hours=`로 조회한다. `NewsCollectorWorker`는 뉴스 RSS 헤드라인을 `NEWS_INTERVAL_MINUTES`(기본 30)마다 `Headlines` 테이블에 저장하고 `GET /api/news?limit=`로 조회한다(피드는 `NEWS_FEED_URL`로 변경). `backend/Crawler`는 수집 소스(환율) 확인용 콘솔이다.
+- 데이터 수집: WeatherApi의 `CollectorWorker`가 실내 온도를 `HISTORY_INTERVAL_MINUTES`(기본 10)마다, 환율(USD/KRW)은 `RATE_INTERVAL_HOURS`(기본 24)마다 한 번(마지막 수집 기록 기준이라 재시작해도 중복 수집하지 않음) SQLite(`backend/WeatherApi/data/history.db`, git 제외)에 저장하고 `GET /api/history?metric=&hours=`로 조회한다. `NewsCollectorWorker`는 뉴스 RSS 헤드라인을 `NEWS_INTERVAL_MINUTES`(기본 30)마다 `Headlines` 테이블에 저장하고 `GET /api/news?limit=`로 조회한다(피드는 `NEWS_FEED_URL`로 변경). `backend/Crawler`는 수집 소스(환율) 확인용 콘솔이다.
 
 ## 작업 방식
 - 각 단계는 최소 1개의 의미 있는 git 커밋으로 마무리한다.

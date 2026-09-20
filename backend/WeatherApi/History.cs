@@ -30,7 +30,7 @@ public static class Metrics
 
 public record ReadingDto(DateTime CollectedAt, double Value);
 
-/// <summary>주기적으로 환율과 실내 온도를 수집해 SQLite에 저장한다.</summary>
+/// <summary>주기적으로 실내 온도를, 하루 한 번 환율을 수집해 SQLite에 저장한다.</summary>
 public class CollectorWorker(
     IServiceScopeFactory scopes,
     IHttpClientFactory httpFactory,
@@ -55,9 +55,13 @@ public class CollectorWorker(
         var ha = scope.ServiceProvider.GetRequiredService<IHomeAssistantClient>();
         var now = DateTime.UtcNow;
 
+        var rateInterval = TimeSpan.FromHours(config.GetValue("RATE_INTERVAL_HOURS", 24));
+        var rateDue = !await db.Readings.AnyAsync(
+            r => r.Metric == Metrics.UsdKrw && r.CollectedAt > now - rateInterval, ct);
+
         try
         {
-            var rate = await FetchUsdKrwAsync(ct);
+            var rate = rateDue ? await FetchUsdKrwAsync(ct) : null;
             if (rate is { } value)
                 db.Readings.Add(new Reading { Metric = Metrics.UsdKrw, Value = value, CollectedAt = now });
         }

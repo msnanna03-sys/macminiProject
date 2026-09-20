@@ -59,7 +59,7 @@
 ## 7단계 (중) — 크롤링/데이터 파이프라인 · 1~1.5주
 - [v] `dotnet new console -o backend/Crawler` (USD/KRW 환율 수집 확인용 콘솔)
 - [v] WeatherApi에 EF Core SQLite 패키지 추가
-- [v] 주기 수집 백그라운드 워커 구현 (Hangfire 또는 BackgroundService) 후 SQLite 저장 (WeatherApi의 BackgroundService, 환율+실내온도, 기본 10분 간격)
+- [v] 주기 수집 백그라운드 워커 구현 (Hangfire 또는 BackgroundService) 후 SQLite 저장 (WeatherApi의 BackgroundService, 실내온도 기본 10분 간격, 환율은 하루 1회)
 - [v] `GET /api/history` 엔드포인트 추가
 - [v] 뉴스 헤드라인 수집 워커 추가 (Google News RSS → SQLite `Headlines`, 30분 간격, URL 중복 제외) 및 `GET /api/news`
 - [v] 대시보드에 뉴스 헤드라인 목록 추가
