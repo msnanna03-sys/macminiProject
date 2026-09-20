@@ -5,6 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddHttpClient<WeatherService>();
 
+if (string.IsNullOrWhiteSpace(builder.Configuration["HOME_ASSISTANT_URL"]))
+    builder.Services.AddSingleton<IHomeAssistantClient, MockHomeAssistantClient>();
+else
+    builder.Services.AddHttpClient<IHomeAssistantClient, HomeAssistantClient>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -37,4 +42,18 @@ app.MapGet("/api/weather", async (string? city, WeatherService weather, Cancella
 .ProducesProblem(StatusCodes.Status404NotFound)
 .ProducesProblem(StatusCodes.Status502BadGateway);
 
+var home = app.MapGroup("/api/home").WithTags("Home");
+
+home.MapGet("/light", (IHomeAssistantClient ha, CancellationToken ct) => ha.GetLightAsync(ct))
+    .WithName("GetLight");
+
+home.MapPost("/light", (LightRequest request, IHomeAssistantClient ha, CancellationToken ct) =>
+    ha.SetLightAsync(request.IsOn, ct))
+    .WithName("SetLight");
+
+home.MapGet("/temperature", (IHomeAssistantClient ha, CancellationToken ct) => ha.GetTemperatureAsync(ct))
+    .WithName("GetTemperature");
+
 app.Run();
+
+record LightRequest(bool IsOn);

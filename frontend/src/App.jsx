@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import PostList from './pages/PostList'
 import PostDetail from './pages/PostDetail'
+import Dashboard from './pages/Dashboard'
 import './App.css'
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<PostList />} />
           <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
     </div>

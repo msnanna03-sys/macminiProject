@@ -11,6 +11,7 @@ export default function Header() {
         <NavLink to="/" end>
           포스트
         </NavLink>
+        <NavLink to="/dashboard">대시보드</NavLink>
       </nav>
       <Weather />
     </header>

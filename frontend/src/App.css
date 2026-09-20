@@ -91,3 +91,40 @@
 .weather--error {
   opacity: 0.6;
 }
+
+.site-header__nav {
+  display: flex;
+  gap: 16px;
+}
+
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.device-card {
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: #fafafa;
+}
+
+.device-card h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.device-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.device-card__value.is-on {
+  color: #d99a00;
+}
+
+.dashboard__error {
+  color: #c0392b;
+}
