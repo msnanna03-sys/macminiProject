@@ -15,12 +15,28 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("History") ?? "Data Source=data/history.db"));
 builder.Services.AddHttpClient();
 builder.Services.AddHostedService<CollectorWorker>();
+builder.Services.AddHostedService<NewsCollectorWorker>();
 
 var app = builder.Build();
 
 Directory.CreateDirectory("data");
 using (var scope = app.Services.CreateScope())
-    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.EnsureCreated();
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated();
+    // EnsureCreated는 기존 DB에 새 테이블을 추가하지 않으므로 Headlines는 직접 보장한다.
+    db.Database.ExecuteSqlRaw("""
+        CREATE TABLE IF NOT EXISTS "Headlines" (
+            "Id" INTEGER NOT NULL CONSTRAINT "PK_Headlines" PRIMARY KEY AUTOINCREMENT,
+            "Title" TEXT NOT NULL,
+            "Url" TEXT NOT NULL,
+            "Source" TEXT NULL,
+            "PublishedAt" TEXT NULL,
+            "CollectedAt" TEXT NOT NULL
+        );
+        CREATE UNIQUE INDEX IF NOT EXISTS "IX_Headlines_Url" ON "Headlines" ("Url");
+        """);
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -77,6 +93,20 @@ app.MapGet("/api/history", async (string metric, int? hours, AppDbContext db, Ca
 })
 .WithName("GetHistory")
 .Produces<List<ReadingDto>>();
+
+app.MapGet("/api/news", async (int? limit, AppDbContext db, CancellationToken ct) =>
+{
+    var headlines = await db.Headlines
+        .OrderByDescending(h => h.PublishedAt ?? h.CollectedAt)
+        .Take(Math.Clamp(limit ?? 20, 1, 100))
+        .ToListAsync(ct);
+    return Results.Ok(headlines.Select(h => new HeadlineDto(
+        h.Title, h.Url, h.Source,
+        h.PublishedAt is { } p ? DateTime.SpecifyKind(p, DateTimeKind.Utc) : null,
+        DateTime.SpecifyKind(h.CollectedAt, DateTimeKind.Utc))));
+})
+.WithName("GetNews")
+.Produces<List<HeadlineDto>>();
 
 app.Run();
 

@@ -13,9 +13,13 @@ public class Reading
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Reading> Readings => Set<Reading>();
+    public DbSet<Headline> Headlines => Set<Headline>();
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
         modelBuilder.Entity<Reading>().HasIndex(r => new { r.Metric, r.CollectedAt });
+        modelBuilder.Entity<Headline>().HasIndex(h => h.Url).IsUnique();
+    }
 }
 
 public static class Metrics
