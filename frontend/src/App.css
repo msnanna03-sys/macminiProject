@@ -143,3 +143,33 @@
   font-weight: 700;
   border-color: #2563eb;
 }
+
+.news-list {
+  margin-top: 32px;
+}
+
+.news-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.news-list a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-list a:hover {
+  text-decoration: underline;
+}
+
+.news-list__meta {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
