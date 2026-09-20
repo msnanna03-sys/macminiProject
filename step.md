@@ -39,8 +39,8 @@
 - [v] Home Assistant 준비 (또는 mock 센서 엔드포인트로 대체) (mock으로 대체, `HOME_ASSISTANT_URL` 설정 시 실제 HA 사용)
 - [v] WeatherApi에 Home Assistant REST API 서비스 레이어 추가
 - [v] 조명 on/off, 온도 조회 엔드포인트 구현
-- [ ] frontend 대시보드 페이지 (기기 상태 카드 + 토글 제어) (구현·빌드 완료, 브라우저 동작 확인 미진행)
-- [ ] 단계 마무리 git 커밋
+- [v] frontend 대시보드 페이지 (기기 상태 카드 + 토글 제어)
+- [v] 단계 마무리 git 커밋 (`b5264ee`)
 
 ## 5단계 (중) — Docker 컨테이너화 · 1주
 - [ ] backend Dockerfile 작성 (멀티스테이지 빌드)
