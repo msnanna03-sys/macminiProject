@@ -50,8 +50,8 @@
 - [v] 단계 마무리 git 커밋
 
 ## 6단계 (중) — 파일 동기화 · 3~4일
-- [ ] Syncthing 설치 (`brew install syncthing`)
-- [ ] `~/homelab` 폴더를 다른 기기와 동기화 설정
+- [v] Syncthing 설치 (백그라운드 서비스로 실행 중) (`brew install syncthing`)
+- [ ] `~/homelab` 폴더를 다른 기기와 동기화 설정 (맥미니 쪽 `homelab` 폴더 등록 완료, 다른 기기 페어링 대기)
 - [ ] 동기화 동작 확인
 - [ ] 단계 마무리 git 커밋
 
