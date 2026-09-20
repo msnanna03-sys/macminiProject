@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import HistoryChart from '../components/HistoryChart'
 
 const POLL_MS = 5000
 
@@ -71,6 +72,7 @@ export default function Dashboard() {
           </p>
         </article>
       </div>
+      <HistoryChart />
     </section>
   )
 }

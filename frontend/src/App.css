@@ -128,3 +128,18 @@
 .dashboard__error {
   color: #c0392b;
 }
+
+.history-chart {
+  margin-top: 32px;
+}
+
+.history-chart__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.history-chart__tabs button.is-active {
+  font-weight: 700;
+  border-color: #2563eb;
+}

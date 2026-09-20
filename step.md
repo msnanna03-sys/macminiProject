@@ -57,11 +57,11 @@
 - [ ] 단계 마무리 git 커밋
 
 ## 7단계 (중) — 크롤링/데이터 파이프라인 · 1~1.5주
-- [ ] `dotnet new console -o backend/Crawler`
-- [ ] WeatherApi에 EF Core SQLite 패키지 추가
-- [ ] 주기 수집 백그라운드 워커 구현 (Hangfire 또는 BackgroundService) 후 SQLite 저장
-- [ ] `GET /api/history` 엔드포인트 추가
-- [ ] 대시보드에 recharts 시각화 컴포넌트 추가
+- [v] `dotnet new console -o backend/Crawler` (USD/KRW 환율 수집 확인용 콘솔)
+- [v] WeatherApi에 EF Core SQLite 패키지 추가
+- [v] 주기 수집 백그라운드 워커 구현 (Hangfire 또는 BackgroundService) 후 SQLite 저장 (WeatherApi의 BackgroundService, 환율+실내온도, 기본 10분 간격)
+- [v] `GET /api/history` 엔드포인트 추가
+- [ ] 대시보드에 recharts 시각화 컴포넌트 추가 (구현·빌드 완료, 브라우저 차트 확인 미진행)
 - [ ] 단계 마무리 git 커밋
 
 ## 8단계 (상) — CI/CD (Harness) · 1.5주

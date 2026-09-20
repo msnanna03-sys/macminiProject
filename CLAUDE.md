@@ -33,6 +33,8 @@ React(Vite) + ASP.NET Core Web API 모노레포. 블로그, 날씨, 스마트홈
 
 - Docker: 루트에서 `docker compose up -d --build`. 프론트 http://localhost:8081 (nginx가 `/api`를 backend:8080으로 프록시), Home Assistant http://localhost:8123. `WEATHER_API_KEY`는 실행하는 셸의 환경변수를 전달한다.
 
+- 데이터 수집: WeatherApi의 `CollectorWorker`가 환율(USD/KRW)·실내 온도를 `HISTORY_INTERVAL_MINUTES`(기본 10)마다 SQLite(`backend/WeatherApi/data/history.db`, git 제외)에 저장하고 `GET /api/history?metric=&hours=`로 조회한다. `backend/Crawler`는 수집 소스(환율) 확인용 콘솔이다.
+
 ## 작업 방식
 - 각 단계는 최소 1개의 의미 있는 git 커밋으로 마무리한다.
 - 새 폴더/컨벤션이 생기면 이 파일을 갱신한다.

@@ -3,6 +3,8 @@ services:
     build: ./backend/WeatherApi
     environment:
       WEATHER_API_KEY: ${WEATHER_API_KEY:-}
+    volumes:
+      - backend-data:/app/data
     restart: unless-stopped
 
   frontend:
@@ -22,4 +24,5 @@ services:
     restart: unless-stopped
 
 volumes:
+  backend-data:
   home-assistant-config:
