@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./backend/WeatherApi
+    environment:
+      WEATHER_API_KEY: ${WEATHER_API_KEY:-}
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  home-assistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    ports:
+      - "8123:8123"
+    volumes:
+      - home-assistant-config:/config
+    restart: unless-stopped
+
+volumes:
+  home-assistant-config:

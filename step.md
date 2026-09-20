@@ -43,11 +43,11 @@
 - [v] 단계 마무리 git 커밋 (`b5264ee`)
 
 ## 5단계 (중) — Docker 컨테이너화 · 1주
-- [ ] backend Dockerfile 작성 (멀티스테이지 빌드)
-- [ ] frontend Dockerfile 작성 (nginx 서빙)
-- [ ] `docker-compose.yml`에 backend, frontend, home-assistant 통합
-- [ ] `docker compose up -d`로 전체 시스템 기동 확인
-- [ ] 단계 마무리 git 커밋
+- [v] backend Dockerfile 작성 (멀티스테이지 빌드)
+- [v] frontend Dockerfile 작성 (nginx 서빙)
+- [v] `docker-compose.yml`에 backend, frontend, home-assistant 통합 (`WEATHER_API_KEY`는 셸 환경변수로 전달, 컨테이너에서 실제 날씨 확인은 미진행)
+- [v] `docker compose up -d`로 전체 시스템 기동 확인
+- [v] 단계 마무리 git 커밋
 
 ## 6단계 (중) — 파일 동기화 · 3~4일
 - [ ] Syncthing 설치 (`brew install syncthing`)
