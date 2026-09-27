@@ -1,0 +1,9 @@
+// 기기별로 재생성되는 산출물은 동기화하지 않는다
+.DS_Store
+node_modules
+dist
+bin
+obj
+*.db
+*.db-shm
+*.db-wal

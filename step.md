@@ -52,7 +52,10 @@
 ## 6단계 (중) — 파일 동기화 · 3~4일
 > 보류: 맥미니가 준비되면 이어서 진행. 현재 기기에는 Syncthing 설치·`homelab` 폴더 등록까지 완료, 아이패드(Möbius Sync/Synctrain) 페어링 예정.
 - [v] Syncthing 설치 (백그라운드 서비스로 실행 중) (`brew install syncthing`)
-- [ ] `~/homelab` 폴더를 다른 기기와 동기화 설정 (맥미니 쪽 `homelab` 폴더 등록 완료, 다른 기기 페어링 대기)
+- [v] 이 MacBook에서 `MacminiProject` 폴더를 Syncthing 폴더(`macmini-project`)로 등록, `.stignore`(node_modules/bin/obj/dist/*.db 제외) 추가, 서비스 재기동
+- [ ] 맥미니에 Syncthing 설치 후 기기 페어링 → `MacminiProject` 폴더 수락 (맥미니 Device ID 필요)
+- [ ] 맥미니 VS Code에서 폴더 열어 동기화 확인 (`npm install`/`dotnet restore`는 맥미니에서 별도 실행)
+- [ ] (선택) `~/homelab` 폴더도 맥미니와 동기화
 - [ ] 동기화 동작 확인
 - [ ] 단계 마무리 git 커밋
 
