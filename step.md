@@ -70,7 +70,7 @@
 - [v] 단계 마무리 git 커밋 (`5530c0a`)
 
 ## 8단계 (상) — CI/CD (Harness) · 1.5주
-- [ ] GitHub에 리포지토리 push
+- [v] GitHub에 리포지토리 push (msnanna03-sys/macminiProject, 공개 저장소·시크릿 이력 없음 확인)
 - [ ] Harness ↔ GitHub 연동
 - [ ] backend/frontend build/test 스크립트 작성 (Run Step에서 호출)
 - [ ] `docker-compose.yml`을 `.env` 기반 환경변수 구성으로 리팩터링
