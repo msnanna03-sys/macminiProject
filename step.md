@@ -17,7 +17,7 @@
 - [ ] `git add/commit/push` 및 PR 생성 연습 (commit/push 완료, PR 미진행)
 - [v] "오늘의 음성 메모" 업로드 UI 추가 (.m4a/.mp3 선택 + 업로드 버튼, 대상 `/api/voice-memo`만 지정)
 - [ ] Harness 계정 생성 및 프로젝트("homelab") 생성
-- [ ] Harness Policy(OPA) 초안 작성 (시크릿 하드코딩 금지 / production 승인 필수 / 이미지 태그 = commit SHA)
+- [ ] Harness Policy(OPA) 초안 작성 (시크릿 하드코딩 금지 / production 승인 필수 / 이미지 태그 = commit SHA) (초안 `harness/policies/deploy-rules.rego` 작성 완료, Harness Policy 편집기에서 테스트 검증 대기)
 - [v] `CLAUDE.md`에 "배포 규칙" 섹션 추가 (Harness Policy와 1:1 대응)
 - [v] 단계 마무리 git 커밋 (`4c34da0`)
 
@@ -71,8 +71,8 @@
 
 ## 8단계 (상) — CI/CD (Harness) · 1.5주
 - [v] GitHub에 리포지토리 push (msnanna03-sys/macminiProject, 공개 저장소·시크릿 이력 없음 확인)
-- [ ] Harness ↔ GitHub 연동
-- [ ] backend/frontend build/test 스크립트 작성 (Run Step에서 호출)
+- [v] Harness ↔ GitHub 연동 (GitHub Connector Connection Test 성공)
+- [v] backend/frontend build/test 스크립트 작성 (Run Step에서 호출) (`scripts/build-backend.sh`, `test-backend.sh`, `build-frontend.sh`. 백엔드 테스트 프로젝트는 아직 없어 건너뜀 → 추후 `*Tests.csproj` 추가 시 자동 실행)
 - [ ] `docker-compose.yml`을 `.env` 기반 환경변수 구성으로 리팩터링
 - [ ] Harness 파이프라인 구성: Build → Push (Docker Hub/GHCR) → Deploy
 - [ ] 맥미니에 Harness Delegate를 Docker로 실행 (compose 서비스로 포함)
