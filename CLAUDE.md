@@ -12,6 +12,7 @@ React(Vite) + ASP.NET Core Web API 모노레포. 블로그, 날씨, 스마트홈
 ## 폴더 구조
 - `frontend/` — React 앱
 - `backend/` — .NET 프로젝트들 (WeatherCli, WeatherApi, Crawler 등)
+- `docs/` — 방법론·설계 문서 (예: `legacy-ontology.md` 레거시 시스템 온톨로지 구성 가이드)
 - 새 서비스는 `backend/<서비스명>/` 아래에 추가한다.
 
 ## 코딩 컨벤션
