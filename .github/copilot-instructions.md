@@ -1,0 +1,41 @@
+# 맥미니 홈서버 프로젝트 — Copilot 지침
+
+React(Vite) + ASP.NET Core Web API 모노레포. 블로그, 날씨, 스마트홈 대시보드, 데이터 히스토리, 로컬 LLM 챗봇을 하나의 앱으로 통합한다.
+(이 파일은 기존 `CLAUDE.md`에서 이전됨. 내용을 바꿀 때는 두 파일을 함께 갱신한다.)
+
+## 스택
+- 프론트엔드: React (Vite), `frontend/`
+- 백엔드: .NET Core (ASP.NET Core Web API), `backend/`
+- 컨테이너: Docker / Docker Compose
+- CI/CD: Harness
+- 오케스트레이션: k3s (10단계)
+
+## 폴더 구조
+- `frontend/` — React 앱
+- `backend/` — .NET 프로젝트들 (WeatherCli, WeatherApi, Crawler 등)
+- 새 서비스는 `backend/<서비스명>/` 아래에 추가한다.
+- `harness/policies/` — Harness OPA 정책, `scripts/` — 빌드/테스트 스크립트
+
+## 코딩 컨벤션
+- C#은 최신 문법을 사용한다 (file-scoped namespace, primary constructor, records, nullable enable 등).
+- React는 함수형 컴포넌트와 hooks만 사용한다. 클래스 컴포넌트 금지.
+- API 경로는 `/api/...` 접두사를 쓴다.
+
+## 배포 규칙 (Harness Policy와 1:1 대응)
+- main 브랜치는 테스트 통과 후에만 머지한다.
+- 시크릿(API 키 등)은 Harness Secret Manager 참조로만 사용하고 코드에 하드코딩하지 않는다. 로컬은 환경변수 사용.
+- backend/frontend 이미지 태그는 git commit SHA 기준으로 생성한다.
+- Deploy 스테이지는 staging 통과 후에만 production으로 진행한다.
+
+## 로컬 개발
+- 백엔드: `dotnet run --project backend/WeatherApi --launch-profile http` (http://localhost:5224, Swagger UI: `/swagger`). `WEATHER_API_KEY` 환경변수 필요.
+- 프론트엔드: `cd frontend && npm run dev`. Vite가 `/api`를 5224로 프록시한다.
+- Home Assistant: `HOME_ASSISTANT_URL`, `HOME_ASSISTANT_TOKEN` 환경변수가 있으면 실제 HA를 호출하고, 없으면 mock 센서를 사용한다.
+- Docker: 루트에서 `docker compose up -d --build`. 프론트 http://localhost:8081 (nginx가 `/api`를 backend:8080으로 프록시), Home Assistant http://localhost:8123. `WEATHER_API_KEY`는 루트 `.env`(git 제외)에 `WEATHER_API_KEY=값` 형태로 둔다.
+- 데이터 수집: WeatherApi의 `CollectorWorker`가 실내 온도를 `HISTORY_INTERVAL_MINUTES`(기본 10)마다, 환율(USD/KRW)은 `RATE_INTERVAL_HOURS`(기본 24)마다 한 번(마지막 수집 기록 기준이라 재시작해도 중복 수집하지 않음) SQLite(`backend/WeatherApi/data/history.db`, git 제외)에 저장하고 `GET /api/history?metric=&hours=`로 조회한다. `NewsCollectorWorker`는 뉴스 RSS 헤드라인을 `NEWS_INTERVAL_MINUTES`(기본 30)마다 `Headlines` 테이블에 저장하고 `GET /api/news?limit=`로 조회한다(피드는 `NEWS_FEED_URL`). `backend/Crawler`는 수집 소스(환율) 확인용 콘솔이다.
+
+## 작업 방식
+- 각 단계는 최소 1개의 의미 있는 git 커밋으로 마무리한다.
+- 새 폴더/컨벤션이 생기면 이 파일을 갱신한다.
+- 작업 재개 시 `step.md`를 먼저 확인하고 다음 단계를 안내한다.
+- 작업 시작 전 `rules.md`의 단계 진행 규칙을 확인하고 따른다. 구현 후 검증을 거쳐 `step.md` 체크박스를 `[v]`로 갱신하고, 검증이 끝나지 않았으면 그 사실을 명시한다.
